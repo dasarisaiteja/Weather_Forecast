@@ -1,7 +1,7 @@
 // API key from OpenWeatherMap
 const apiKey = "69e77be11aab1f328c9f1023e95796be";
 
-// --- Global Element Selectors (FIX for Scope Issue 1) ---
+// --- Global Element Selectors  ---
 const button = document.querySelector("#search_btn");
 const cityInput = document.querySelector("#city_name"); // Declare and assign the input element
 const todayContainer = document.querySelector("#today_weather");
@@ -10,6 +10,62 @@ const forecastContainer = document.querySelector("#display_5days_data");
 
 // Set count for the 5-day / 3-hour forecast (40 entries max)
 const FORECAST_COUNT = 40; 
+
+//current location button
+const curlocbtn=document.querySelector("#current_location_btn");
+
+// Get current location weather
+curlocbtn.addEventListener("click", () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+
+                // Fetch weather by coordinates
+                await getWeatherByCoords(lat, lon);
+                await getForecastByCoords(lat, lon);
+            },
+            (error) => {
+                alert("Geolocation error: " + error.message);
+            }
+        );
+    } else {
+        alert("Geolocation is not supported by your browser");
+    }
+});
+
+async function getWeatherByCoords(lat, lon) {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.cod === 200) {
+            showWeather(data);
+        } else {
+            todayContainer.innerHTML = "<h2>Today's Weather</h2><p>Unable to get weather for current location.</p>";
+        }
+    } catch (error) {
+        console.error("Error fetching current location weather: ", error);
+        todayContainer.innerHTML = "<h2>Today's Weather</h2><p>Error fetching data.</p>";
+    }
+}
+
+async function getForecastByCoords(lat, lon) {
+    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=${FORECAST_COUNT}&appid=${apiKey}&units=metric`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.cod === "200") {
+            showForecastWeather(data);
+        } else {
+            forecastContainer.innerHTML = "<h2>5-Day Forecast</h2><p>Unable to get forecast for current location.</p>";
+        }
+    } catch (error) {
+        console.error("Error fetching forecast for current location: ", error);
+        forecastContainer.innerHTML = "<h2>5-Day Forecast</h2><p>Error fetching data.</p>";
+    }
+}
 
 // --- Event Listener ---
 
