@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earthy Weather Forecast</title>
-    
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="output.css" rel="stylesheet">
-    
     
 </head>
 <body class="min-h-screen transition-colors duration-500 bg-natural-bg font-sans text-primary-dark">
@@ -30,12 +29,12 @@
                 <button 
                     id="searchBtn" 
                     class="bg-forest-green text-sand-light px-8 py-3 rounded-full font-bold hover:bg-moss-green transition transform active:scale-95 shadow-md disabled:opacity-50">
-                    Search
+                    <i class="fa-solid fa-magnifying-glass"></i> Search
                 </button>
                 <button 
                     id="locationBtn" 
                     class="bg-moss-green text-sand-light px-8 py-3 rounded-full font-bold hover:bg-forest-green transition transform active:scale-95 shadow-md disabled:opacity-50">
-                    Use My Location
+                    <i class="fa-solid fa-location-crosshairs"></i> Use My Location
                 </button>
             </div>
 
@@ -49,7 +48,7 @@
 
             <!-- Error Message -->
             <div id="errorMessage" class="hidden mt-4 p-4 bg-error-bg border border-error-border text-error-text rounded-xl">
-                <!-- Error messages go here -->
+                
             </div>
         </div>
 
@@ -62,7 +61,7 @@
 
             <div class="flex flex-col md:flex-row items-center justify-around">
                 <div class="text-center mb-6 md:mb-0">
-                    <span id="weatherIcon" class="text-9xl block mb-2 text-moss-green"></span>
+                    <img id="weatherIcon" class="w-24 h-24 mx-auto mb-2" alt="Weather Icon">
                     <p id="weatherDescription" class="text-2xl text-primary-dark capitalize font-semibold"></p>
                 </div>
 
@@ -101,12 +100,12 @@
         <div id="forecastSection" class="hidden mt-10">
             <h3 class="text-3xl font-bold text-forest-green mb-6 text-center">5-Day Forecast</h3>
             <div id="forecastCards" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                <!-- Forecast cards will be added here by JavaScript -->
+                
             </div>
         </div>
     </div>
 
-    <!-- Application Logic -->
+    
     <script src="script.js"></script>
 </body>
 </html>

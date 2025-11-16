@@ -1,8 +1,9 @@
-// API Key - You need to get your own from openweathermap.org
-const apiKey = '69e77be11aab1f328c9f1023e95796be'; // Replace with your actual API key
+// API Key 
+const apiKey = '69e77be11aab1f328c9f1023e95796be'; 
+// api link
 const API_URL = 'https://api.openweathermap.org/data/2.5';
 
-// Variables to store current unit (celsius or fahrenheit)
+// Variables to store current unit celsius or fahrenheit
 let isCelsius = true;
 let currentTempCelsius = 0;
 // Variable to store raw 5-day forecast data for unit conversion
@@ -27,6 +28,7 @@ searchBtn.addEventListener('click', function() {
         return;
     }
     getWeatherByCity(city);
+    cityInput.value = '';
 });
 
 // Allow user to press Enter key to search
@@ -76,7 +78,7 @@ unitToggle.addEventListener('click', function() {
         tempElement.textContent = Math.round(tempF) + '°';
     }
 
-    // Re-render 'Feels like' and forecast for consistency
+    
     updateUnitDependentText();
     
 });
@@ -120,7 +122,7 @@ function getWeatherByCity(city) {
             displayCurrentWeather(data);
             saveToRecentSearches(city);
             
-            // Fetch 5-day forecast - 🛑 CRITICAL FIX: Use /forecast endpoint
+            // Fetch 5-day forecast 
             return fetch(`${API_URL}/forecast?q=${city}&appid=${apiKey}&units=metric`);
         })
         .then(response => response.json())
@@ -145,7 +147,7 @@ function getWeatherByCoordinates(lat, lon) {
             displayCurrentWeather(data);
             saveToRecentSearches(data.name);
             
-            // Fetch 5-day forecast - 🛑 CRITICAL FIX: Use /forecast endpoint
+            // Fetch 5-day forecast 
             return fetch(`${API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
         })
         .then(response => response.json())
@@ -229,7 +231,7 @@ function displayForecast(data) {
     const forecastCards = document.getElementById('forecastCards');
     forecastCards.innerHTML = '';
     
-    // Get one forecast per day (around noon)
+    // Get one forecast per day 
     const dailyForecasts = [];
     
     // The OpenWeatherMap /forecast endpoint returns the forecast in a 'list' property
@@ -240,7 +242,7 @@ function displayForecast(data) {
         const date = new Date(forecast.dt * 1000);
         const hour = date.getHours();
         
-        // Get forecast around 12:00 PM
+        // Get forecast at 12:00 PM
         if (hour >= 11 && hour <= 13) {
             dailyForecasts.push(forecast);
             if (dailyForecasts.length === 5) break;

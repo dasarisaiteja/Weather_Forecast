@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@theme {
+        --color-natural-bg: #80CBC4;       
+        --color-primary-dark: #333A40;      
+        --color-forest-green: #1E5631;     
+        --color-moss-green: #5B8C51;       
+        --color-sand-light: #FFFFFF;       
+        --color-clay-card: #EFECE0;       
+        --color-clay-text: #726D68;        
+        --color-border-earth: #D4CFC5;      
+        
+      
+        --color-error-bg: #FBEAEA;         
+        --color-error-border: #E57373;     
+        --color-error-text: #C0392B;
+}
